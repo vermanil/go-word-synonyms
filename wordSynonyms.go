@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 	"encoding/xml"
-	// "net/http"
+	"net/http"
+	"io/ioutil"
 )
 
 const (
@@ -34,20 +35,24 @@ func formatUrl(query string) string {
 	return fmt.Sprintf(synonymsURl, query)
 }
 
-func fetchSynonyms(url string) string {
-
-	return "hello"
-}
 
 func main() {
 
 	query := os.Args[1:][0]
 	url := formatUrl(query)	
-	
-	// fmt.Println(url)
+	resp, err := http.Get(url)
+	bytes, _ := ioutil.ReadAll(resp.Body)
+	// fmt.Println(bytes)
+	resp.Body.Close()
+
+	if err != nil {
+	    fmt.Println(err)
+	}
+
+	fmt.Println(url)
 	var syn synos
 
-	xml.Unmarshal(demoXml, &syn)
+	xml.Unmarshal(bytes, &syn)
 	range_ := len(syn.Entries)
 	for a :=0; a < range_; a++ {
 		fmt.Println(syn.Entries[a].Type)
