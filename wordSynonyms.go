@@ -56,7 +56,6 @@ func main() {
 	range_ := len(syn.Entries)
 	for a :=0; a < range_; a++ {
 		fmt.Println(syn.Entries[a].Type)
-
 		fmt.Println(syn.Entries[a].Values[0].Synonyms[0].Syn)
 	}
 }
