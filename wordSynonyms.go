@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	synonymsURl = " https://fraze.it/api/syn/%s/en/360b4932-8c19-464e-93bd-cfb9e62a46ab"
+	synonymsURl = "https://fraze.it/api/syn/%s/en/360b4932-8c19-464e-93bd-cfb9e62a46ab"
 )
 
 type synos struct {
@@ -41,6 +41,8 @@ func main() {
 	query := os.Args[1:][0]
 	url := formatUrl(query)	
 	resp, err := http.Get(url)
+
+	// fmt.Println("hhahah")
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	// fmt.Println(bytes)
 	resp.Body.Close()
@@ -49,7 +51,7 @@ func main() {
 	    fmt.Println(err)
 	}
 
-	fmt.Println(url)
+	// fmt.Println(url)
 	var syn synos
 
 	xml.Unmarshal(bytes, &syn)
